@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card gradient-forest">
+                        <div class="card-body  p-5">
+                            <div class="card-title text-success"><h4 style="text-align: center;color:white">添加用户</h4>
+                            </div>
+                            <hr>
+                            <form method="post" action="{% url "library:add_user" %}">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="input-6" style="color: white">用户名</label>
+                                    <input type="text" required class="form-control form-control-rounded" name="name"
+                                           id="input-6"
+                                           placeholder="请输入用户名">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-7" style="color: white">昵称</label>
+                                    <input type="text" required class="form-control form-control-rounded" name="nickname"
+                                           id="input-7"
+                                           placeholder="输入用户昵称">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-8" style="color: white">密码</label>
+                                    <input type="password" required class="form-control form-control-rounded" name="password"
+                                           id="input-8"
+                                           placeholder="请输入用户密码">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="input-10" style="color: white">请输入手机号码</label>
+                                    <input type="tel" required class="form-control form-control-rounded" name="phone"
+                                           id="input-10"
+                                           placeholder="输入手机号码">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="input-20"
+                                           style="color: white">借书名</label>
+                                    <select name="books" required
+                                            class="form-control single-select select2-hidden-accessible"
+                                            id="input-20">
+                                        {% for book_obj in book_obj_list %}
+                                            <option value="{{ book_obj.id }}">{{ book_obj.book_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <br>
+                                <br>
+
+                                <div class="modal fade" id="modal-animation-14">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated fadeInUp">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">确认弹框</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>你确定要保存数据吗？
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                        data-dismiss="modal"><i
+                                                        class="fa fa-times"></i> 关闭
+                                                </button>
+                                                <button type="submit" class="btn btn-success"><i
+                                                        class="fa fa-check-square-o"></i> 保存
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <button type="button"
+                                        class="btn btn-primary btn-lg btn-block waves-effect waves-light m-1"
+                                        data-toggle="modal" data-target="#modal-animation-14"><i
+                                        class="zmdi zmdi-check-circle"></i>提交
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div><!--End Row-->
+
+
+        </div>
+        <!-- End container-fluid-->
+    </div>
+
+{% endblock %}
+

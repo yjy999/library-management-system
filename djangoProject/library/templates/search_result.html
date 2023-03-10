@@ -1,0 +1,338 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {% if books_search_result == True %}
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card gradient-forest">
+                            <div class="card gradient-forest"><h4 style="color:#a538ef">图书查询结果</h4></div>
+                            <div class="card-body text-center p-5">
+                                <div class="table-responsive">
+                                    <div id="default-datatable_wrapper"
+                                         class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-dark table-striped shadow-dark"
+                                                       role="grid" aria-describedby="default-datatable_info">
+                                                    <thead>
+                                                    <tr role="row">
+                                                        <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Name: activate to sort column descending"
+                                                            style="width: 50px;
+                                                    font-size:17px">
+                                                            <p>图书编号</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
+                                                            style="width: 100px;font-size:17px"><p>图书名称</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 100px;font-size:17px"><p>图书图片</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 100px;font-size:17px"><p>图书类型</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 100px;font-size:17px"><p>作者</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 100px;font-size:17px"><p>图书价格</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 100px;font-size:17px"><p>图书评分</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 101px;font-size:17px"><p>图书简介</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 100px;font-size:17px"><p>图书销量</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 100px;font-size:17px"><p>图书评论量</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 100px;font-size:17px"><p>图书库存</p>
+                                                        </th>
+                                                        <th class="sorting" tabindex="0"
+                                                            aria-controls="default-datatable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 100px;font-size:17px"><p>出版社</p>
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for book_obj in books_obj_list %}
+                                                        <tr role="row" class="odd">
+                                                            <td class="sorting_1"
+                                                                style="width: 50px">{{ book_obj.book_num }}</td>
+                                                            <td>{{ book_obj.book_name }}</td>
+                                                            <!-- 使用弹框来显示图书的详情-->
+                                                            <td>
+                                                                <a href="{% static book_obj.image_set.first.img_address.name %}"
+                                                                   data-fancybox="group2"
+                                                                   data-caption="{{ book_obj.book_name }}">
+                                                                    <img src="{% static book_obj.image_set.first.img_address.name %}"
+                                                                         alt="lightbox"
+                                                                         class="lightbox-thumb img-thumbnail">
+                                                                </a>
+
+
+                                                            </td>
+                                                            <td>{{ book_obj.book_type }}</td>
+                                                            <td>{{ book_obj.author }}</td>
+                                                            <td>{{ book_obj.book_price }}</td>
+                                                            <td>{{ book_obj.book_score }}</td>
+                                                            <td style="width: 100px">
+                                                                <div style="width:100px;overflow: hidden;text-overflow: ellipsis">{{ book_obj.book_description }}</div>
+                                                            </td>
+                                                            <td>{{ book_obj.book_sales }}</td>
+                                                            <td>{{ book_obj.comment_nums }}</td>
+                                                            <td>{{ book_obj.book_inventory }}</td>
+                                                            <td>{{ book_obj.publisher.name }}</td>
+
+                                                        </tr>
+                                                    {% endfor %}
+
+
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End Row-->
+
+        </div>
+    {% elif publishers_search_result == True %}
+        <div class="content-wrapper">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card gradient-forest">
+                            <div class="card gradient-forest"><h4 style="color:rgba(27,241,33,0.98)">出版社查询结果</h4></div>
+                            <div class="card-body text-center p-5">
+                                <div class="table-responsive">
+                                    <div id="default-datatable_wrapper"
+                                         class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-dark table-striped shadow-dark">
+                                                <thead>
+                                                <tr role="row" class="odd">
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 140px;
+                                                    font-size:17px">
+                                                        <p>出版社id</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 225px;font-size:17px"><p>出版社</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 101px;font-size:17px"><p>出版社地址</p>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for publisher_obj in publishers_obj_list %}
+                                                    <tr role="row" class="odd">
+                                                        <td class="sorting_1">{{ publisher_obj.id }}</td>
+                                                        <td>{{ publisher_obj.name }}</td>
+                                                        <td>{{ publisher_obj.address }}</td>
+                                                    </tr>
+                                                {% endfor %}
+
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif user_search_result == True %}
+        <div class="content-wrapper">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card gradient-forest">
+                            <div class="card gradient-forest"><h4 style="color:#ff0000">用户查询结果</h4></div>
+                            <div class="card-body text-center p-5">
+                                <div class="table-responsive">
+                                    <div id="default-datatable_wrapper"
+                                         class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table id="default-datatable"
+                                                       class="table table-dark table-striped shadow-dark"
+                                                       role="grid" aria-describedby="default-datatable_info">
+                                                    <thead>
+                                                    <tr role="row">
+
+
+                                                        <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Name: activate to sort column descending"
+                                                            style="width: 50px;
+                                                    font-size:17px">
+                                                            <p>用户id</p>
+                                                        </th>
+                                                        <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Name: activate to sort column descending"
+                                                            style="width: 50px;
+                                                    font-size:17px">
+                                                            <p>用户名</p>
+                                                        </th>
+                                                        <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Name: activate to sort column descending"
+                                                            style="width: 50px;
+                                                    font-size:17px">
+                                                            <p>昵称</p>
+                                                        </th>
+                                                        <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Name: activate to sort column descending"
+                                                            style="width: 50px;
+                                                    font-size:17px">
+                                                            <p>手机号</p>
+                                                        </th>
+                                                        <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Name: activate to sort column descending"
+                                                            style="width: 50px;
+                                                    font-size:17px">
+                                                            <p>借书名</p>
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for user_obj in users_obj_list %}
+                                                        <tr role="row" class="odd">
+                                                            <td class="sorting_1">{{ user_obj.id }}</td>
+                                                            <td>{{ user_obj.name }}</td>
+                                                            <td>{{ user_obj.nickname }}</td>
+                                                            <td>{{ user_obj.phone }}</td>
+                                                            <td>
+                                                                {% for book_obj in user_obj.books.all %}
+                                                                    {% if forloop.last %}
+                                                                        {{ book_obj.book_name }}
+                                                                    {% else %}
+                                                                        {{ book_obj.book_name }}
+                                                                    {% endif %}
+                                                                {% endfor %}
+
+                                                            </td>
+
+                                                        </tr>
+                                                    {% endfor %}
+
+
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div id="wrapper">
+
+            <div class="container" style="margin: 20px 310px">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center error-pages">
+                            <h1 class="error-title text-white"> page404</h1>
+                            <h2 class="error-sub-title text-white">查询失败</h2>
+
+                            <p class="error-message text-white text-uppercase">{{ error_msg }}</p>
+
+                            <div class="mt-4">
+                                <a href="/library/index/" class="btn btn-info btn-round shadow-info m-1">返回主页</a>
+                                {#                          <a href="javascript:void();" class="btn btn-info btn-round m-1">Previous Page </a>#}
+                            </div>
+
+
+                            <hr class="w-50 border-light-2">
+                            <hr class="w-50 border-light-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--wrapper-->
+    {% endif %}
+{% endblock %}
+
